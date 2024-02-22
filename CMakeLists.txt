@@ -8,4 +8,6 @@ add_executable(Assignment_2
         src/maze.h
         src/maze.cpp
         src/stack.h
-        src/stack.cpp)
+        src/stack.cpp
+        src/maze_solver.h
+        src/maze_solver.cpp)

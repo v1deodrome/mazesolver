@@ -12,10 +12,8 @@ struct Node {
     explicit Node(Coordinates _input_coords);
 };
 
-// The stack is a line that draws itself to the end of the maze. By the time this program
-// is finished running, think of it as the giant snake that goes from point A to point B.
 class Stack {
-    // The last node in the stack, which points to the one before that, and so on so forth.
+    // The last node in the stack.
     std::unique_ptr<Node> _top{nullptr};
 public:
     // Add something on top of the stack.
@@ -24,6 +22,8 @@ public:
     std::optional<Coordinates> peek();
     // Remove the top node of the stack.
     void pop();
+    // Get the data from the head
+    Coordinates top_coordinates();
 };
 
 #endif //ASSIGNMENT_2_STACK_H

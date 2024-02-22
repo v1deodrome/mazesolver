@@ -20,3 +20,7 @@ void Stack::pop() {
         _top = std::move(_top->_next);
     }
 }
+
+Coordinates Stack::top_coordinates() {
+    return _top->_coords;
+}
