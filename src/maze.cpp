@@ -14,3 +14,11 @@ Maze::Maze(const std::string& _input_filepath) {
         }
     }
 }
+
+void Maze::draw_solution_portion(Coordinates coord) {
+    _maze_vector[coord.y_coord][coord.x_coord] = '#';
+}
+
+void Maze::delete_solution_portion(Coordinates coord) {
+    _maze_vector[coord.y_coord][coord.x_coord] = ' ';
+}
