@@ -3,7 +3,7 @@ project(Assignment_2)
 
 set(CMAKE_CXX_STANDARD 17)
 
-add_executable(Assignment_2
+add_executable(mazesolver
         src/main.cpp
         src/maze.h
         src/maze.cpp
