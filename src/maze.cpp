@@ -21,6 +21,23 @@ Maze::Maze(const std::string& _input_filepath) {
     }
 }
 
+std::string Maze::output_maze() {
+    std::string _output;
+    for (auto & i : _maze_vector) {
+        for (char j : i) {
+            // clean output of Xs
+            if (j == 'X') {
+                _output.append(1,' ');
+            }
+            else {
+                _output.append(1,j);
+            }
+        }
+        _output.append(1,'\n');
+    }
+    return _output;
+}
+
 Coordinates Maze::find_entrance() {
     // declaring this array as static prevents undefined behavior from returning an array
     Coordinates entrance;
@@ -37,25 +54,33 @@ Coordinates Maze::find_entrance() {
     return entrance;
 }
 
-bool Maze::is_empty(Coordinates coordinates) {
-    return (_maze_vector[coordinates.y_coord][coordinates.x_coord] == ' ');
+bool Maze::is_empty(Coordinates coord) {
+    return (_maze_vector[coord.y_coord][coord.x_coord] == ' ');
 }
 
-bool Maze::is_intersection(Coordinates coordinates) {
+bool Maze::is_intersection(Coordinates coord) {
     int _path_counter = 0;
-    if (_maze_vector[coordinates.y_coord+1][coordinates.x_coord] == ' ') {
+    if (_maze_vector[coord.y_coord + 1][coord.x_coord] == ' ') {
         _path_counter++;
     }
-    if (_maze_vector[coordinates.y_coord-1][coordinates.x_coord] == ' ') {
+    if (_maze_vector[coord.y_coord - 1][coord.x_coord] == ' ') {
         _path_counter++;
     }
-    if (_maze_vector[coordinates.y_coord][coordinates.x_coord+1] == ' ') {
+    if (_maze_vector[coord.y_coord][coord.x_coord + 1] == ' ') {
         _path_counter++;
     }
-    if (_maze_vector[coordinates.y_coord][coordinates.x_coord-2] == ' ') {
+    if (_maze_vector[coord.y_coord][coord.x_coord - 2] == ' ') {
         _path_counter++;
     }
     return (_path_counter >= 2);
+}
+
+bool Maze::is_exit(Coordinates coord) {
+    return (coord.x_coord == 0 ||
+            coord.x_coord == _maze_vector[1].size()-1 ||
+            coord.y_coord == 0 ||
+            coord.y_coord == _maze_vector.size()-1
+            );
 }
 
 void Maze::draw_solution_portion(Coordinates coord) {
@@ -64,4 +89,8 @@ void Maze::draw_solution_portion(Coordinates coord) {
 
 void Maze::delete_solution_portion(Coordinates coord) {
     _maze_vector[coord.y_coord][coord.x_coord] = ' ';
+}
+
+void Maze::block_coordinate(Coordinates coord) {
+    _maze_vector[coord.y_coord][coord.x_coord] = 'X';
 }
