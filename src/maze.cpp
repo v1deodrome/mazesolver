@@ -11,8 +11,7 @@ Coordinates::Coordinates() = default;
 Maze::Maze(const std::string& _input_filepath) {
     std::ifstream _file(_input_filepath);
     int _row_number = 0;
-    // ideally we'd like to populate with booleans, but since we're printing this it doesn't make
-    // sense to waste memory on a completely new vector that works *slightly* better for parsing
+    // populate _maze_vector with characters from the txt file
     for (std::string _row_content; std::getline(_file, _row_content); _row_number++) {
         _maze_vector.emplace_back();
         for (int i = 0; i < _row_content.length(); i++) {
